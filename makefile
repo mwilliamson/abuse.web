@@ -1,7 +1,7 @@
 .PHONY: test
 
 start-server:
-	NODE_PATH=src node src/ZWOBBLE/abuse/web/handler.js
+	NODE_PATH=lib node src/ZWOBBLE/abuse/web/handler.js
 
 test:
-	NODE_PATH=src nodeunit `find test -type d`
+	NODE_PATH=lib nodeunit `find test -type d`
