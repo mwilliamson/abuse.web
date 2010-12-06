@@ -61,3 +61,16 @@ exports.regexResultsArePassedToFunction  = function(test) {
     test.equal("123bob", response.body);
     test.done();
 };
+
+exports.default404HandlerIsUsedIfNoHandlersMatch  = function(test) {
+    var response = simpleResponse(),
+        request = {url: "/"},
+        dispatcher = dispatch.dispatcher();
+        
+    dispatcher.dispatch(request, response);
+    
+    test.equal("404", response.body);
+    test.equal(404, response.status);
+    test.equal("text/plain", response.headers["Content-Type"]);
+    test.done();
+};
