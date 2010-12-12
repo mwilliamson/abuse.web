@@ -55,15 +55,26 @@ li a {
     text-decoration: none;
     background-color: #f4f2f0;
     color: #222;
-    padding: 0.5em 1em 0.5em 2em;
-    background-image: url("/static/images/link-arrow.png");
-    background-repeat: no-repeat;
-    background-position: 1em center;
+    padding: 0.5em 1em;
 }
 
 li a:hover {
     background-color: #FFD385;
     color: #222;
+}
+
+.linkArrow {
+    display: block;
+    float: left;
+    border: 0;
+    padding-right: 1em;
+    font-size: 0.8em;
+    margin-top: 0.1em;
+/*
+    font-family: "Trebuchet ms";
+*/
+    font-weight: bold;
+    color: #FFB733;
 }
 
 pre {
@@ -74,4 +85,19 @@ pre {
     border-color: #047878;
     border-style: solid;
     border-width: 2px 0;
+}
+
+blockquote {
+    margin: 1em;
+    padding: 1em;
+    background-color: #f1f4f4;
+    color: #000;
+    border-color: #F57336;
+    border-style: solid;
+    border-width: 2px 0;
+}
+
+blockquote p {
+    margin: 0;
+    padding: 0;
 }
