@@ -1,4 +1,5 @@
-var dispatch = require("ZWOBBLE/abuse/web/dispatch");
+var dispatch = require("ZWOBBLE/abuse/web/dispatch"),
+    inject = require("ZWOBBLE/abuse/web/inject");
 
 var simpleResponse = function() {
     return {
@@ -13,52 +14,66 @@ var simpleResponse = function() {
 };
 
 exports.dispatcherUsesFirstMatchingHandlerToDispatchRequest  = function(test) {
-    var response = simpleResponse(),
+    var response = {},
         request = {},
         dispatcher = dispatch.dispatcher(),
-        nonMatchingHandler = function() { return {body: "noMatch"}; },
-        firstMatchingHandler = function() { return {body: "firstMatch"}; },
-        secondMatchingHandler = function() { return {body: "secondMatch"}; };
+        usedHandlers = [],
+        nonMatchingHandler = function() { usedHandlers.push("noMatch"); },
+        firstMatchingHandler = function() { usedHandlers.push("firstMatch"); },
+        secondMatchingHandler = function() { usedHandlers.push("secondMatch"); };
         
     dispatcher.add(new RegExp("^/$"), nonMatchingHandler);
     dispatcher.add(new RegExp("^/[a-z]*$"), firstMatchingHandler);
     dispatcher.add(new RegExp("^/.*$"), secondMatchingHandler);
     
     request.url = "/grammars";
-    dispatcher.dispatch(request, response);
+    dispatcher.dispatch(request, response, inject.injector());
     
-    test.equal("firstMatch", response.body);
+    test.equal(1, usedHandlers.length);
+    test.equal("firstMatch", usedHandlers[0]);
     test.done();
 };
 
-exports.statusAndHeadersAreWrittenToResponse  = function(test) {
+exports.dispatcherUsesInjectorToCallFunctions  = function(test) {
     var response = simpleResponse(),
         request = {},
         dispatcher = dispatch.dispatcher(),
-        handler = function() { return {status: 200, "type": "text/plain"}; };
+        injector = inject.injector(),
+        user = {name: "Bob"},
+        args,
+        handler = inject.injectable("user", function(user) {
+            args = arguments;
+        });
+    
+    injector.bind("user").toInstance(user);
         
     dispatcher.add(new RegExp(""), handler);
     
     request.url = "/grammars";
-    dispatcher.dispatch(request, response);
+    dispatcher.dispatch(request, response, injector);
     
-    test.equal(200, response.status);
-    test.equal("text/plain", response.headers["Content-Type"]);
+    test.equal(1, args.length);
+    test.equal(user, args[0]);
     test.done();
 };
 
-exports.regexResultsArePassedToFunction  = function(test) {
+exports.regexResultsAreBoundToPathParameters = function(test) {
     var response = simpleResponse(),
         request = {},
         dispatcher = dispatch.dispatcher(),
-        handler = function(first, second) { return {body: second + first}; };
+        injector = inject.injector(),
+        args,
+        handler = inject.injectable("pathParameters", function(pathParams) {
+            args = arguments;
+        });
         
-    dispatcher.add(new RegExp("^/([a-z]*)([0-9]*)$"), handler);
+    dispatcher.add(new RegExp("^/([a-z]*)$"), "name", handler);
     
-    request.url = "/bob123";
-    dispatcher.dispatch(request, response);
+    request.url = "/grammars";
+    dispatcher.dispatch(request, response, injector);
     
-    test.equal("123bob", response.body);
+    test.equal(1, args.length);
+    test.deepEqual({name: "grammars"}, args[0]);
     test.done();
 };
 

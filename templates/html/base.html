@@ -1,0 +1,26 @@
+meta: []
+
+<!DOCTYPE HTML>
+
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <title>[title|html]</title>
+    [.repeated section include-js]
+      <script type='text/javascript' src="[@|html-attr-value]"></script>
+    [.end]
+
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    [.repeated section include-css]
+      <link rel="stylesheet" type="text/css" href="[@|html-attr-value]" />
+    [.end]
+  </head>
+
+  <body>
+    <h1>Abuse</h1>
+  
+    [body|raw]
+  </body>
+
+</html>
+

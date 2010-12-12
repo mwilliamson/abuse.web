@@ -29,7 +29,7 @@ exports.injectorCanCallInjectableFunction = function(test) {
     
     injector.bind("user").toFunction(function() { return user; });
     
-    test.equal("Bob", injector.call(username));
+    test.equal("Bob", injector.inject(username));
     test.done();
 };
 
@@ -41,7 +41,7 @@ exports.callingNonInjectableFunctionCallsFunctionWithNoArgs = function(test) {
             return "Bob";
         };
     
-    test.equal("Bob", injector.call(username));
+    test.equal("Bob", injector.inject(username));
     test.equal(0, args.length);
     test.done();
 };

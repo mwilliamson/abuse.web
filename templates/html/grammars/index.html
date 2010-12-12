@@ -1,0 +1,11 @@
+<h2>All grammars</h2>
+
+{.section grammars}
+  <ul>
+    {.repeated section @}
+      <li><a href="/grammars/{name|html-attr-value}/">{title|html}</a></li>
+    {.end}
+  </ul>
+{.or}
+  <p>No grammars found.</p>
+{.end}
