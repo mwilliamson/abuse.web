@@ -29,7 +29,7 @@ exports.injectorCanCallInjectableFunction = function(test) {
     
     injector.bind("user").toProvider(function() { return user; });
     
-    test.equal("Bob", injector.inject(username));
+    test.equal("Bob", injector.get(username));
     test.done();
 };
 
@@ -45,7 +45,7 @@ exports.injectorInjectInjectableFunctions = function(test) {
     
     injector.bind("user").toProvider(function() { return user; });
     
-    test.equal("Bob", injector.inject(usernameAgain));
+    test.equal("Bob", injector.get(usernameAgain));
     test.done();
 };
 
@@ -57,7 +57,7 @@ exports.callingNonInjectableFunctionCallsFunctionWithNoArgs = function(test) {
             return "Bob";
         };
     
-    test.equal("Bob", injector.inject(username));
+    test.equal("Bob", injector.get(username));
     test.equal(0, args.length);
     test.done();
 };
@@ -86,6 +86,6 @@ exports.bindingToFunctionInjectsAnInjectableFunctionWithParametersAlreadyInjecte
     injector.bind("user").toInstance(user);
     injector.bind("getUsername").toFunction(username);
     
-    test.equal("Bob", injector.inject(usernameAgain));
+    test.equal("Bob", injector.get(usernameAgain));
     test.done();
 };
