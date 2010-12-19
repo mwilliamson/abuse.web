@@ -1,5 +1,5 @@
-var dispatch = require("ZWOBBLE/abuse/web/dispatch"),
-    inject = require("ZWOBBLE/abuse/web/inject");
+var dispatch = require("abuse-web/dispatch"),
+    inject = require("abuse-web/inject");
 
 var simpleResponse = function() {
     return {
