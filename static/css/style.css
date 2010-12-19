@@ -101,3 +101,8 @@ blockquote p {
     margin: 0;
     padding: 0;
 }
+
+.example {
+    font-style: italic;
+    padding-left: 1em;
+}
