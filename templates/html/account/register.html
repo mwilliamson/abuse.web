@@ -1,5 +1,16 @@
 <h2>Register</h2>
 
+{.section errors}
+  <p>Registration failed. Ha!</p>
+  <ul class="errors">
+    {.repeated section @}
+      <li>{@|raw}</li>
+    {.end}
+  </ul>
+{.end}
+
+<form method="post" action=".">
+
 <p><label for="username">Choose a username (lowercase letters, numbers, underscores and hyphens only):</label>
 <br />
 <input type="text" name="username" id="username" value="{username|html-attr-value}" maxlength="{usernameMaxLength|html-attr-value}" size="30" />
@@ -22,6 +33,10 @@
 <p><label for="password2">Re-enter password:</label>
 <br />
 <input type="password" name="password2" id="password2" size="30" /></p>
+
+<input type="submit" value="Register" />
+
+</form>
 
 <h2>Places of disinterest</h2>
 

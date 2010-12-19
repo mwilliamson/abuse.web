@@ -37,20 +37,20 @@ h2 {
 */
 }
 
-ul {
+ul.links {
     margin: 1em;
     padding: 0;
     border-top: #FFB733 1px solid;
     border-bottom: #FFB733 2px solid;
 }
 
-li {
+.links li {
     margin: 0;
     list-style-type: none;
     border-top: #FFB733 1px solid;
 }
 
-li a {
+.links li a {
     display: block;
     text-decoration: none;
     background-color: #f4f3f0;
@@ -58,7 +58,7 @@ li a {
     padding: 0.5em 1em;
 }
 
-li a:hover {
+.links li a:hover {
     background-color: #FFD385;
     color: #222;
 }
