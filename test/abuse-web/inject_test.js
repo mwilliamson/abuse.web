@@ -6,60 +6,71 @@ exports.bindingInstanceToKeyResultsInThatInstanceAlwaysBeingReturned  = function
     
     injector.bind("user").toInstance(user);
     
-    test.equal(user, injector.get("user"));
-    test.done();
+    injector.get("user", function(value) {
+        test.equal(user, value);
+        test.done();
+    });
 };
 
 exports.bindingInstanceToProviderResultsInTheFunctionBeingCalledWhen = function(test) {
     var injector = inject.injector(),
         user = {name: "Bob"};
     
-    injector.bind("user").toProvider(function() { return user; });
+    injector.bind("user").toProvider(function(done) { done(user); });
     
-    test.equal(user, injector.get("user"));
-    test.done();
+    injector.get("user", function(value) {
+        test.equal(user, value);
+        test.done();
+    });
 };
 
 exports.injectorCanCallInjectableFunction = function(test) {
     var injector = inject.injector(),
         user = {name: "Bob"},
-        username = inject.injectable("user", function(user) {
-            return user.name;
+        username = inject.injectable("user", function(user, done) {
+            done(user.name);
         });
     
-    injector.bind("user").toProvider(function() { return user; });
+    injector.bind("user").toProvider(function(done) { done(user); });
     
-    test.equal("Bob", injector.get(username));
-    test.done();
+    injector.get(username, function(value) {
+        test.equal("Bob", value);
+        test.done();
+    });
 };
 
 exports.injectorInjectInjectableFunctions = function(test) {
     var injector = inject.injector(),
         user = {name: "Bob"},
-        username = inject.injectable("user", function(user) {
-            return user.name;
+        username = inject.injectable("user", function(user, done) {
+            done(user.name);
         }),
-        usernameAgain = inject.injectable(username, function(username) {
-            return username;
+        usernameAgain = inject.injectable(username, function(username, done) {
+            done(username);
         });
     
-    injector.bind("user").toProvider(function() { return user; });
+    injector.bind("user").toProvider(function(done) { done(user); });
     
-    test.equal("Bob", injector.get(usernameAgain));
-    test.done();
+    injector.get(usernameAgain, function(value) {
+        test.equal("Bob", value);
+        test.done();
+    });
 };
 
 exports.callingNonInjectableFunctionCallsFunctionWithNoArgs = function(test) {
     var injector = inject.injector(),
         args,
-        username = function() {
+        username = function(done) {
             args = arguments;
-            return "Bob";
+            done("Bob");
         };
     
-    test.equal("Bob", injector.get(username));
-    test.equal(0, args.length);
-    test.done();
+    injector.get(username, function(value) {
+        test.equal("Bob", value);
+        test.equal(1, args.length);
+        test.done();
+    });
+    
 };
 
 exports.canBindKeysToInjectableFunctions = function(test) {
@@ -67,27 +78,31 @@ exports.canBindKeysToInjectableFunctions = function(test) {
         user = {name: "Bob"};
     
     injector.bind("user").toInstance(user);
-    injector.bind("username").toProvider(inject.injectable("user", function(user) { return user.name; }));
+    injector.bind("username").toProvider(inject.injectable("user", function(user, done) { done(user.name); }));
     
-    test.equal("Bob", injector.get("username"));
-    test.done();
+    injector.get("username", function(value) {
+        test.equal("Bob", value);
+        test.done();
+    });
 };
 
 exports.bindingToFunctionInjectsAnInjectableFunctionWithParametersAlreadyInjected = function(test) {
     var injector = inject.injector(),
         user = {name: "Bob"},
-        username = inject.injectable("user", function(user) {
-            return user.name;
+        username = inject.injectable("user", function(user, done) {
+            done(user.name);
         }),
-        usernameAgain = inject.injectable("getUsername", function(getUsername) {
-            return getUsername();
+        usernameAgain = inject.injectable("getUsername", function(getUsername, done) {
+            getUsername(done);
         });
     
     injector.bind("user").toInstance(user);
     injector.bind("getUsername").toFunction(username);
     
-    test.equal("Bob", injector.get(usernameAgain));
-    test.done();
+    injector.get(usernameAgain, function(value) {
+        test.equal("Bob", value);
+        test.done();
+    });
 };
 
 exports.canUseAsynchronousProviders = function(test) {
@@ -97,7 +112,9 @@ exports.canUseAsynchronousProviders = function(test) {
             setTimeout(function() {
                 done(user.name);
             }, 0);
-            return undefined;
+        }),
+        usernameAgain = inject.injectable("getUsername", function(getUsername) {
+            return getUsername();
         });
     
     injector.bind("user").toInstance(user);
