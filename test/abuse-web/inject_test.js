@@ -89,3 +89,20 @@ exports.bindingToFunctionInjectsAnInjectableFunctionWithParametersAlreadyInjecte
     test.equal("Bob", injector.get(usernameAgain));
     test.done();
 };
+
+exports.canUseAsynchronousProviders = function(test) {
+    var injector = inject.injector(),
+        user = {name: "Bob"},
+        username = inject.injectable("user", function(user, done) {
+            setTimeout(function() {
+                done(user.name);
+            }, 0);
+            return undefined;
+        });
+    
+    injector.bind("user").toInstance(user);
+    injector.get(username, function(value) {
+        test.equal("Bob", value);
+        test.done();
+    });
+};

@@ -52,7 +52,6 @@ exports.dispatcherUsesInjectorToCallFunctions  = function(test) {
     request.url = "/grammars";
     dispatcher.dispatch(request, response, injector);
     
-    test.equal(1, args.length);
     test.equal(user, args[0]);
     test.done();
 };
@@ -72,7 +71,6 @@ exports.regexResultsAreBoundToPathParameters = function(test) {
     request.url = "/grammars";
     dispatcher.dispatch(request, response, injector);
     
-    test.equal(1, args.length);
     test.deepEqual({name: "grammars"}, args[0]);
     test.done();
 };
