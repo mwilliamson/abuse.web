@@ -3,12 +3,17 @@ body {
     margin: 0;
 }
 
-#header {
+#top {
     border-bottom: #C22121 2px solid;
     color: #222;
     background-color: #f0eeee;
     margin: 0;
-    padding: 0.5em 0.2em 0.4em 0.5em;
+    padding: 0.5em 0.5em 0.4em 0.5em;
+    overflow: auto;
+}
+
+#header {
+    float: left;
 }
 
 #header h1 {
@@ -21,12 +26,28 @@ body {
     font-size: 0.8em;
 }
 
+#accountControls {
+    float: right;
+    line-height: 1.5
+}
+
+#accountControls ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+#accountControls a, #accountControls a:visited {
+    color: #003399;
+}
+
 #body {
     padding: 0 1em 0 1em;
 }
 
 body {
-    background-color: #ff;
+    background-color: #fff;
     color: #000;
 }
 

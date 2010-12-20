@@ -38,7 +38,7 @@ function _MakeTokenRegex(meta_left, meta_right) {
   var key = meta_left + meta_right;
   var regex = token_re_cache[key];
   if (regex === undefined) {
-    var str = '(' + EscapeMeta(meta_left) + '.*?' + EscapeMeta(meta_right) +
+    var str = '(' + EscapeMeta(meta_left) + '[\\s\\S]*?' + EscapeMeta(meta_right) +
               '\n?)';
     regex = new RegExp(str, 'g');
   }
@@ -541,6 +541,7 @@ function _Compile(template_str, options) {
   function GetFormatter(format_str) {
     var pair = all_formatters.lookup(format_str);
     if (!pair[0]) {
+      require("sys").print(format_str);
       throw {
         name: 'BadFormatter',
         message: format_str + ' is not a valid formatter'
