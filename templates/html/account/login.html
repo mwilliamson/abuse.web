@@ -1,0 +1,32 @@
+<h2>Log in</h2>
+
+{.section errors}
+  <p>Login failed. Too bad.</p>
+  <ul class="errors">
+    {.repeated section @}
+      <li>{@|raw}</li>
+    {.end}
+  </ul>
+{.end}
+
+<form method="post" action=".">
+
+<p><label for="username">Username:</label>
+<br />
+<input type="text" name="username" id="username" value="{username|html-attr-value}" size="30" />
+</p>
+
+<p><label for="password">Password:</label>
+<br />
+<input type="password" name="password" id="password" size="30" /></p>
+
+<input type="submit" value="Log in" />
+
+</form>
+
+<h2>Places of disinterest</h2>
+
+<ul class="links">
+  <li><a href="/register/"><span class="linkArrow">&gt;</span>I don't have an account.</a></li>
+  <li><a href="/"><span class="linkArrow">&gt;</span>I feel sick. Take me home.</a></li>
+</ul>
