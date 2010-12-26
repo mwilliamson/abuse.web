@@ -23,14 +23,15 @@ meta: []
         <p>Because everybody deserves to feel miserable.
       </div>
       <div id="accountControls">
-        [.section user]
-          <p>Logged in as [username|html].</p>
-        [.or]
-          <ul>
+        <ul>
+          [.section user]
+            <li>Logged in as [username|html].</li>
+            <li><a href="/logout/">Logout</a></li>
+          [.or]
             <li><a href="/login/">Login</a></li>
             <li><a href="/register/">Register</a></li>
-          </ul>
-        [.end]
+          [.end]
+        </ul>
       </div>
     </div>
     <div id="body">
