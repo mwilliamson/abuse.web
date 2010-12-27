@@ -1,5 +1,22 @@
 <h2>How {title|html} thinks:</h2>
 
+{.section successfulSave}
+  <p>Grammar successfully saved.</p>
+{.end}
+
+{.section failedSave}
+  <p>Failed to save grammar -- unable to generate any complete sentences.</p>
+{.end}
+
+{.section warnings}
+  <h3>Warnings</h3>
+  <ul>
+    {.repeated section @}
+      <li>{@|html}</li>
+    {.end}
+  </ul>
+{.end}
+
 <form action="." method="post">
   <textarea rows="15" cols="80" style="display:block" name="grammarBody">{grammar|html}</textarea>
   <input type="submit" value="Save grammar" />
