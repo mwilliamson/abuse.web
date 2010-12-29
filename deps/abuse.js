@@ -1,5 +1,12 @@
 (function(exports) {
     var nonTerminalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_";
+    
+    var errorTypes = {
+        missingArrow: "missingArrow",
+        missingClosingBrace: "missingClosingBrace",
+        noProductionRule: "noProductionRule",
+        ruleNeverUsed: "ruleNeverUsed"
+    };
 
     var rightTrimmed = function(text) {
         return text.replace(/\s+$/, "");
@@ -13,10 +20,12 @@
         return rightTrimmed(leftTrimmed(text));
     };
 
-    var nonTerminal = function(name) {
+    var nonTerminal = function(name, lineNumber, characterNumber) {
         return {
             text: "",
             name: name,
+            lineNumber: lineNumber,
+            characterNumber: characterNumber,
             isNonTerminal: true,
             expand: function(ruleSet, selector) {
                 return ruleSet.expand(name, selector);
@@ -40,7 +49,7 @@
         return nonTerminalChars.indexOf(char) !== -1;
     };
     
-    var parseRight = function(right) {
+    var parseRight = function(right, lineNumber, offset) {
         var nodes = [],
             dollarIndex,
             endOfNonTerminal,
@@ -57,7 +66,7 @@
                     return {
                         error: {
                             missingClosingBrace: true,
-                            openingIndex: dollarIndex + 1
+                            openingIndex: offset + dollarIndex + 1
                         }
                     };
                 }
@@ -72,7 +81,7 @@
                 nonTerminalName = right.substring(dollarIndex + 1, endOfNonTerminal);
             }
             
-            nodes.push(nonTerminal(nonTerminalName));
+            nodes.push(nonTerminal(nonTerminalName, lineNumber, offset + dollarIndex));
             index = endOfNonTerminal;
         }
         remainder = rightTrimmed(right.slice(index));
@@ -91,24 +100,88 @@
             right;
         if (components.length < 2) {
             return {
-                error: "Missing symbol on line " + lineNumber + ": " + splitString
+                error: {
+                    str: "Missing symbol on line " + lineNumber + ": " + splitString,
+                    type: errorTypes.missingArrow,
+                    lineNumber: lineNumber
+                }
             };
         }
         
-        right = parseRight(components[1]);
+        right = parseRight(components[1], lineNumber, components[0].length + splitString.length + 1);
         
         if (right.error) {
             return {
-                error: "Missing closing brace on line " + lineNumber +
-                    " (opening brace at character " +
-                    (right.error.openingIndex + components[0].length + splitString.length + 1) +")"
+                error: {
+                    str: "Missing closing brace on line " + lineNumber +
+                        " (opening brace at character " +
+                        right.error.openingIndex + ")",
+                    type: errorTypes.missingClosingBrace,
+                    lineNumber: lineNumber,
+                    openingBraceCharacterNumber: right.error.openingIndex
+                }
             };
         }
         
         return {
-            left: nonTerminal(trimmed(components[0]).slice(1)),
+            left: nonTerminal(trimmed(components[0]).slice(1), lineNumber, 1),
             right: right.nodes
         };
+    };
+    
+    var findOrphanedSymbols = function(rules, errors) {
+        var startSymbols = [],
+            startSymbolNames,
+            nonTerminalsOnRhs = [],
+            nonTerminalNames,
+            missingProductionRuleStr = "No production rule for non-terminal $";
+            
+        rules.forEach(function(rule) {
+            startSymbols.push(rule.left);
+            rule.right.forEach(function(node) {
+                if (node.isNonTerminal) {
+                    nonTerminalsOnRhs.push(node);
+                }
+            });
+        });
+        
+        startSymbolNames = startSymbols.map(function(node) {
+            return node.name;
+        });
+        nonTerminalNames = nonTerminalsOnRhs.map(function(node) {
+            return node.name;
+        });
+        nonTerminalNames.push(sentence.name);
+        
+        if (startSymbolNames.indexOf(sentence.name) === -1) {
+            errors.push({
+                str: missingProductionRuleStr + sentence.name,
+                type: errorTypes.noProductionRule,
+                nonTerminal: sentence.name
+            });
+        }
+        nonTerminalsOnRhs.forEach(function(node) {
+            if (startSymbolNames.indexOf(node.name) === -1) {
+                errors.push({
+                    str: missingProductionRuleStr + node.name +
+                         " (line " + node.lineNumber + ", character " + node.characterNumber + ")",
+                    type: errorTypes.noProductionRule,
+                    nonTerminal: node.name,
+                    lineNumber: node.lineNumber,
+                    characterNumber: node.characterNumber
+                });
+            }
+        });
+        startSymbols.forEach(function(node) {
+            if (nonTerminalNames.indexOf(node.name) === -1) {
+                errors.push({
+                    str: "Production rule with start symbol $" + node.name +
+                         " is never used (line " + node.lineNumber + ")",
+                    type: errorTypes.ruleNeverUsed,
+                    lineNumber: node.lineNumber
+                });
+            }
+        });
     };
     
     var parse = function(text) {
@@ -127,6 +200,9 @@
                 }
             }
         }
+        
+        findOrphanedSymbols(rules, errors);
+        
         return {
             rules: rules,
             errors: errors
@@ -247,4 +323,5 @@
     exports.randomSelector = function(upper) {
         return Math.floor(Math.random() * upper);
     };
+    exports.errors = errorTypes;
 })(typeof ZWOBBLE === "undefined" ? exports : ZWOBBLE.abuse);
