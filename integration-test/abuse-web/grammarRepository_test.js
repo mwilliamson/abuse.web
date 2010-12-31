@@ -138,3 +138,32 @@ integrationTest(grammarRepository, userRepository, function(grammarRepository, u
         });
     });
 });
+
+exports.fetchByNameAndRevisionCallsFailureCallbackIfNameDoesNotExist =
+integrationTest(grammarRepository, userRepository, function(grammarRepository, userRepository, test) {
+    grammarRepository.fetchByNameAndRevision("mike", 2, function(grammar) {
+        test.ok(false, "Should call second callback");
+        test.done();
+    }, function() {
+        test.done();
+    });
+});
+
+exports.fetchByNameAndRevisionCallsFailureCallbackIfRevisionDoesNotExist =
+integrationTest(grammarRepository, userRepository, function(grammarRepository, userRepository, test) {
+    userRepository.create({
+        username: "mike",
+        realName: "Mike",
+        password: "password1",
+        email: "mike@example.com"
+    }, function() {
+        grammarRepository.updateOrCreateGrammar("mike", "GRAMMAR", function() {
+            grammarRepository.fetchByNameAndRevision("mike", 2, function(grammar) {
+                test.ok(false, "Should call second callback");
+                test.done();
+            }, function() {
+                test.done();
+            });
+        });
+    });
+});
