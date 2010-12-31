@@ -41,3 +41,26 @@ integrationTest(grammarRepository, userRepository, function(grammarRepository, u
         });
     });
 });
+
+exports.canUpdateAGrammar =
+integrationTest(grammarRepository, userRepository, function(grammarRepository, userRepository, test) {
+    userRepository.create({
+        username: "mike",
+        realName: "Mike",
+        password: "password1",
+        email: "mike@example.com"
+    }, function() {
+        grammarRepository.updateOrCreateGrammar("mike", "GRAMMAR", function() {
+            grammarRepository.updateOrCreateGrammar("mike", "BETTER-GRAMMAR", function() {
+                grammarRepository.fetchByName("mike", function(grammar) {
+                    test.strictEqual("mike", grammar.name);
+                    test.strictEqual("BETTER-GRAMMAR", grammar.body);
+                    test.done();
+                }, function(grammar) {
+                    test.ok(false, "Should call first callback");
+                    test.done();
+                });
+            });
+        });
+    });
+});
