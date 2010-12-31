@@ -28,8 +28,8 @@ $(document).ready(function() {
                 } else if (element.createTextRange) {
                     range = element.createTextRange();
                     range.collapse(true);
-                    range.moveEnd('character', pos);
-                    range.moveStart('character', pos + lines[line].length);
+                    range.moveStart('character', pos);
+                    range.moveEnd('character', lines[line].length);
                     range.select();
                 }
                 scrollToLine(element, line, lines.length);
