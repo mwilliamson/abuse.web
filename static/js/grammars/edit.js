@@ -1,9 +1,16 @@
 $(document).ready(function() {
     var timer,
         undefined,
+        scrollToLine = function(element, line, totalLines) {
+            var lineHeight = element.scrollHeight / totalLines;
+                scrollTo = line * lineHeight;
+            if (scrollTo <  element.scrollTop ||
+                    scrollTo + lineHeight > element.scrollTop + element.clientHeight) {
+                element.scrollTop = scrollTo;
+            }
+        },
         setCursorPosition = function(elements, line, character) {
             elements.each(function(index, element) {
-                // Need to calculate pos by reading out the textarea
                 var range,
                     pos = 0,
                     lines = $(element).val().split("\n"),
@@ -25,6 +32,7 @@ $(document).ready(function() {
                     range.moveStart('character', pos + lines[line].length);
                     range.select();
                 }
+                scrollToLine(element, line, lines.length);
                 $(element).focus();
             });
         },
