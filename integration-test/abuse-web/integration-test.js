@@ -19,6 +19,7 @@ exports.integrationTest = function() {
         });
         injectArgs.push(func);
         inject.injectable.apply(undefined, injectArgs);
+        client.flushdb();
         injector.get(func);
         test.done = function() {
             client.flushdb();
