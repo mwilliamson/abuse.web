@@ -13,7 +13,7 @@ exports.integrationTest = function() {
     injector.bind("request").toInstance({});
     
     return function(test) {        
-        var testDone = test.done();
+        var testDone = test.done;
         injectArgs.push(function(done) {
             done(test)
         });
