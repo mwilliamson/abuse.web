@@ -91,3 +91,24 @@ integrationTest(grammarRepository, userRepository, function(grammarRepository, u
         });
     });
 });
+
+exports.updatingAnExistingGrammarDoesntAddItToTheListOfGrammars =
+integrationTest(grammarRepository, userRepository, function(grammarRepository, userRepository, test) {
+    userRepository.create({
+        username: "mike",
+        realName: "Mike",
+        password: "password1",
+        email: "mike@example.com"
+    }, function() {
+        grammarRepository.updateOrCreateGrammar("mike", "GRAMMAR", function() {
+            grammarRepository.updateOrCreateGrammar("mike", "BETTER-GRAMMAR", function() {
+                grammarRepository.fetchAllNamesAndTitles(function(grammars) {
+                    test.strictEqual(1, grammars.length);
+                    test.strictEqual("mike", grammars[0].name);
+                    test.strictEqual("Mike", grammars[0].title);
+                    test.done();
+                });
+            });
+        });
+    });
+});
