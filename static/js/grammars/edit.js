@@ -2,7 +2,7 @@ $(document).ready(function() {
     var timer,
         undefined,
         scrollToLine = function(element, line, totalLines) {
-            var lineHeight = element.scrollHeight / totalLines;
+            var lineHeight = element.scrollHeight / totalLines,
                 scrollTo = line * lineHeight;
             if (scrollTo <  element.scrollTop ||
                     scrollTo + lineHeight > element.scrollTop + element.clientHeight) {
