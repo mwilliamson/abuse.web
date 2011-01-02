@@ -33,6 +33,7 @@ integrationTest(grammarRepository, userRepository, function(grammarRepository, u
             grammarRepository.fetchByName("mike", function(grammar) {
                 test.strictEqual("mike", grammar.name);
                 test.strictEqual("GRAMMAR", grammar.grammar);
+                test.strictEqual(1, grammar.revision);
                 test.done();
             }, function(grammar) {
                 test.ok(false, "Should call first callback");
@@ -55,6 +56,7 @@ integrationTest(grammarRepository, userRepository, function(grammarRepository, u
                 grammarRepository.fetchByName("mike", function(grammar) {
                     test.strictEqual("mike", grammar.name);
                     test.strictEqual("BETTER-GRAMMAR", grammar.grammar);
+                    test.strictEqual(2, grammar.revision);
                     test.done();
                 }, function(grammar) {
                     test.ok(false, "Should call first callback");

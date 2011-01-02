@@ -129,3 +129,7 @@ blockquote p {
     font-style: italic;
     padding-left: 1em;
 }
+
+a, a:visited {
+    color: #003399;
+}
