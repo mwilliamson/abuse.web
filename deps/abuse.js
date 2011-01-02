@@ -26,13 +26,7 @@
             name: name,
             lineNumber: lineNumber,
             characterNumber: characterNumber,
-            isNonTerminal: true,
-            expand: function(ruleSet, selector) {
-                return ruleSet.expand(name, selector);
-            },
-            expandAll: function(ruleSet) {
-                return ruleSet.expandAll(name);
-            }
+            isNonTerminal: true
         };
     };
 
@@ -227,12 +221,8 @@
             rules[left].push(rule.right);
         }
         return {
-            expand: function(left, selector) {
-                var possibleRules = rules[left];
-                if (possibleRules === undefined) {
-                    return undefined;
-                }
-                return possibleRules[selector(possibleRules.length)];
+            rulesFor: function(left) {
+                return rules[left] || [];
             },
             expandAll: function(left) {
                 return rules[left] || [];
@@ -246,7 +236,10 @@
             newUnexpandedNodes,
             i,
             result = [],
+            sequence = [],
+            ruleIndex,
             ruleSet = buildRuleSet(rules),
+            possibleRules,
             depth = -1,
             generateFromAllSentences = function() {
                 var all = generateAll(rules, depth);
@@ -261,16 +254,25 @@
             node = unexpandedNodes.pop();
             result.push(node.text);
             if (node.isNonTerminal) {
-                newUnexpandedNodes = node.expand(ruleSet, selector);
-                if (newUnexpandedNodes === undefined) {
+                possibleRules = ruleSet.rulesFor(node.name);
+                if (possibleRules.length === 0) {
                     return generateFromAllSentences();
                 }
+                ruleIndex = selector(possibleRules.length);
+                if (ruleIndex === undefined || ruleIndex >= possibleRules.length || ruleIndex < 0) {
+                    return undefined;
+                }
+                sequence.push(ruleIndex);
+                newUnexpandedNodes = possibleRules[ruleIndex];
                 for (i = newUnexpandedNodes.length - 1; i >= 0; i -= 1) {
                     unexpandedNodes.push(newUnexpandedNodes[i]);
                 }
             }
         }
-        return result.join("");
+        return {
+            str: result.join(""),
+            sequence: sequence
+        };
     };
     
     var reversed = function(array) {
@@ -279,16 +281,20 @@
         return copy;
     };
     
-    var generateAllRecursive = function(ruleSet, currentResult, unexpandedNodes, depth) {
+    var generateAllRecursive = function(ruleSet, currentResult, currentSequence, unexpandedNodes, depth) {
         var unexpandedNode,
             rules,
             rule,
             ruleIndex,
             i,
             results,
-            subResults;
+            subResults,
+            newSequence;
         if (unexpandedNodes.length === 0) {
-            return [currentResult.join("")];
+            return [{
+                str: currentResult.join(""),
+                sequence: currentSequence
+            }];
         }
         if (depth === -1) {
             return [];
@@ -297,9 +303,9 @@
         currentResult = currentResult.slice(0);
         currentResult.push(unexpandedNode.text);
         if (unexpandedNode.isTerminal) {
-            return generateAllRecursive(ruleSet, currentResult, unexpandedNodes, depth);
+            return generateAllRecursive(ruleSet, currentResult, currentSequence, unexpandedNodes, depth);
         }
-        rules = unexpandedNode.expandAll(ruleSet);
+        rules = ruleSet.rulesFor(unexpandedNode.name);
         if (rules.length === 0) {
             return [];
         }
@@ -307,7 +313,9 @@
         results = [];
         for (ruleIndex = 0; ruleIndex < rules.length; ruleIndex += 1) {
             rule = rules[ruleIndex];
-            subResults = generateAllRecursive(ruleSet, currentResult, unexpandedNodes.concat(reversed(rule)), depth - 1);
+            newSequence = currentSequence.slice(0);
+            newSequence.push(ruleIndex);
+            subResults = generateAllRecursive(ruleSet, currentResult, newSequence, unexpandedNodes.concat(reversed(rule)), depth - 1);
             for (i = 0; i < subResults.length; i += 1) {
                 results.push(subResults[i]);
             }
@@ -316,7 +324,7 @@
     };
     
     var generateAll = function(rules, depth) {
-        return generateAllRecursive(buildRuleSet(rules), [], [sentence], depth);
+        return generateAllRecursive(buildRuleSet(rules), [], [], [sentence], depth);
     };
     
     exports.nonTerminal = nonTerminal;
