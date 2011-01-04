@@ -63,17 +63,17 @@ h2 {
 ul.links {
     margin: 1em;
     padding: 0;
-    border-top: #FFB733 1px solid;
-    border-bottom: #FFB733 2px solid;
+    border-top: #FFB733 2px solid;
+    border-bottom: #FFB733 1px solid;
 }
 
 .links li {
     margin: 0;
     list-style-type: none;
-    border-top: #FFB733 1px solid;
+    border-bottom: #FFB733 1px solid;
 }
 
-.links li a {
+.links li a, .links li a:visited {
     display: block;
     text-decoration: none;
     background-color: #f4f3f0;
