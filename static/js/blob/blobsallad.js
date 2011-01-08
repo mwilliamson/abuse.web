@@ -992,7 +992,7 @@ BLOBS.create = function(id) {
     function init() {
         var canvas = document.getElementById(id);
         if (canvas.getContext == null) {
-            return null;
+            return false;
         }
 
         function getMouseCoords(event) {
@@ -1051,6 +1051,7 @@ BLOBS.create = function(id) {
         stopped = false;
 
         timeout();
+        return true;
     }
 
     function stop() {
@@ -1069,7 +1070,9 @@ BLOBS.create = function(id) {
             gravity.y = 10.0;
         }
     }
-    init();
+    if (!init()) {
+        return null;
+    }
     return {
         stop: stop,
         start: start,

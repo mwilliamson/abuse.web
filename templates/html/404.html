@@ -2,6 +2,8 @@ meta: []
 
 <h2>404 Not Found</h2>
 
+<div id="blobContainer" style="display: none">
+
 <p>I've no idea what you were looking for, so play with some blobs instead.</p>
 
 <canvas id="blob" width="600" height="400"></canvas><br>
@@ -19,8 +21,13 @@ meta: []
 <script>
     $(document).ready(function() {
         var blobs = BLOBS.create("blob");
-        document.getElementById("pause").onclick = blobs.stop;
-        document.getElementById("resume").onclick = blobs.start;
-        blobs.bindControlsTo(document);
+        if (blobs !== null) {
+            $("#blobContainer").show();
+            document.getElementById("pause").onclick = blobs.stop;
+            document.getElementById("resume").onclick = blobs.start;
+            blobs.bindControlsTo(document);
+        }
     });
 </script>
+
+</div>    
