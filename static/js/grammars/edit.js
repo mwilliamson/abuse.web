@@ -1,19 +1,35 @@
 $(document).ready(function() {
     var timer,
         undefined,
-        scrollToLine = function(element, line, totalLines) {
-            var lineHeight = element.scrollHeight / totalLines,
-                scrollTo = line * lineHeight;
-            if (scrollTo <  element.scrollTop ||
-                    scrollTo + lineHeight > element.scrollTop + element.clientHeight) {
-                element.scrollTop = scrollTo;
+        calculateLineHeight = function() {
+            var firstTextArea = 
+            $(body).appe
+        },
+        scrollToLine = function(element, line, pos, text) {
+            var dummyTextArea = $(element).clone(),
+                initialTextAreaLines = 1000,
+                initialScrollHeight,
+                targetScrollHeight,
+                lineHeight;
+            $(element).after(dummyTextArea);
+            dummyTextArea.val((new Array(initialTextAreaLines)).join("\n"));
+            initialScrollHeight = dummyTextArea.get(0).scrollHeight;
+            lineHeight = initialScrollHeight / initialTextAreaLines;
+            dummyTextArea.val(dummyTextArea.val() + text.slice(0, pos));
+            targetScrollHeight = dummyTextArea.get(0).scrollHeight - initialScrollHeight;
+            dummyTextArea.remove();
+            
+            if (targetScrollHeight <  element.scrollTop ||
+                    targetScrollHeight + lineHeight > element.scrollTop + element.clientHeight) {
+                element.scrollTop = targetScrollHeight;
             }
         },
         setCursorPosition = function(elements, line, character) {
             elements.each(function(index, element) {
                 var range,
                     pos = 0,
-                    lines = $(element).val().split("\n"),
+                    text = $(element).val(),
+                    lines = text.split("\n"),
                     i = 0;
                 if (line >= lines.length) {
                     return;
@@ -32,7 +48,7 @@ $(document).ready(function() {
                     range.moveEnd('character', lines[line].length);
                     range.select();
                 }
-                scrollToLine(element, line, lines.length);
+                scrollToLine(element, line, pos, text);
                 $(element).focus();
             });
         },
