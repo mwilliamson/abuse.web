@@ -1,1 +1,26 @@
+meta: []
+
 <h2>404 Not Found</h2>
+
+<p>I've no idea what you were looking for, so play with some blobs instead.</p>
+
+<canvas id="blob" width="600" height="400"></canvas><br>
+
+<input type="button" value="Pause" id="pause" /><input type="button" value="Resume" id="resume" />
+
+<ul>
+<li>Move the blobs using your mouse.</li>
+<li>Split blob with h.</li>
+<li>Join blobs with j.</li>
+<li>Toggle gravity with g.</li>
+</ul>
+
+<script src="/static/js/blob/blobsallad.js"></script>
+<script>
+    $(document).ready(function() {
+        var blobs = BLOBS.create("blob");
+        document.getElementById("pause").onclick = blobs.stop;
+        document.getElementById("resume").onclick = blobs.start;
+        blobs.bindControlsTo(document);
+    });
+</script>
