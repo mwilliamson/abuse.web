@@ -27,9 +27,10 @@ var exports = module.exports = function(settings){
             // and the current timestamp. The cookie needs to be set on every
             // response so that the timestamp is up to date, and the session
             // does not expire unless the user is inactive.
+
             var cookiestr;
-            if (req.session === null || req.session === undefined || req.session === {}) {
-                if (req.headers.cookie !== undefined) {
+            if (req.session === undefined) {
+                if ("cookie" in req.headers) {
                     cookiestr = escape(s.session_key) + '='
                         + '; expires=' + exports.expires(0)
                         + '; path=/';
@@ -40,6 +41,7 @@ var exports = module.exports = function(settings){
                     + '; expires=' + exports.expires(s.timeout)
                     + '; path=/';
             }
+            
             if (cookiestr !== undefined) {
                 if(Array.isArray(headers)) headers.push(['Set-Cookie', cookiestr]);
                 else {
@@ -188,7 +190,7 @@ exports.readSession = function(key, secret, timeout, req){
     if(cookies[key]){
         return exports.deserialize(secret, timeout, cookies[key]);
     }
-    return null;
+    return undefined;
 };
 
 
