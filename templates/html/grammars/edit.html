@@ -1,41 +1,45 @@
-<h2>How {title|html} thinks:</h2>
+{>base/}
 
-{.section successfulSave}
-  <p>Grammar successfully saved.</p>
-{.end}
+{<body}
+  <h2>How {title} thinks:</h2>
 
-{.section failedSave}
-  <p>Failed to save grammar -- unable to generate any complete sentences.</p>
-{.end}
+  {?successfulSave}
+    <p>Grammar successfully saved.</p>
+  {/successfulSave}
 
-<noscript>
-{.section warnings}
-  <h3>Warnings</h3>
-  <ul>
-    {.repeated section @}
-      <li>{@|html}</li>
-    {.end}
-  </ul>
-{.end}
-</noscript>
+  {?failedSave}
+    <p>Failed to save grammar -- unable to generate any complete sentences.</p>
+  {/failedSave}
 
-<form action="." method="post">
-  <textarea rows="15" cols="80" style="display:block" name="grammarBody" id="grammarBody">{grammar|html}</textarea>
-  <input type="submit" value="Save grammar" />
-</form>
+  <noscript>
+  {?warnings}
+    <h3>Warnings</h3>
+    <ul>
+      {#warnings}
+        <li>{.}</li>
+      {/warnings}
+    </ul>
+  {/warnings}
+  </noscript>
 
-<div id="warnings" style="display:none">
-  <h3>Warnings</h3>
-  <ul id="warningsList">
-  </ul>
-</div>
+  <form action="." method="post">
+    <textarea rows="15" cols="80" style="display:block" name="grammarBody" id="grammarBody">{grammar}</textarea>
+    <input type="submit" value="Save grammar" />
+  </form>
 
-<h2>Places of disinterest</h2>
+  <div id="warnings" style="display:none">
+    <h3>Warnings</h3>
+    <ul id="warningsList">
+    </ul>
+  </div>
 
-<ul class="links">
-  <li><a href="/"><span class="linkArrow">&gt;</span>I feel sick. Take me home.</a></li>
-</ul>
+  <h2>Places of disinterest</h2>
 
-{# TODO: find a better way of incorporating JS }
+  {#navigation}
+    {#a url="/"}I feel sick. Take me home.{/a}
+  {/navigation}
 
-<script type="text/javascript" src="/static/js/grammars/edit.js"></script>
+  {! TODO: find a better way of incorporating JS !}
+
+  <script type="text/javascript" src="/static/js/grammars/edit.js"></script>
+{/body}

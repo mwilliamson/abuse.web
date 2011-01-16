@@ -1,11 +1,17 @@
-<h2>How {title|html} thinks:</h2>
+{>base/}
 
-<pre>{grammar|html}</pre>
+{<body}
 
-<h2>Places of disinterest</h2>
+  <h2>How {title} thinks:</h2>
 
-<ul class="links">
-  <li><a href="../"><span class="linkArrow">&gt;</span>But what does {title|html} say?</a></li>
-  <li><a href="/grammars/"><span class="linkArrow">&gt;</span>Who cares about {title|html}? Who else is there?</a></li>
-  <li><a href="/"><span class="linkArrow">&gt;</span>I feel sick. Take me home.</a></li>
-</ul>
+  <pre>{grammar}</pre>
+
+  <h2>Places of disinterest</h2>
+  
+  {#navigation}
+    {#a url="../"}But what does {title} say?{/a}
+    {#a url="/grammars/"}Who cares about {title}? Who else is there?{/a}
+    {#a url="/"}I feel sick. Take me home.{/a}
+  {/navigation}
+
+{/body}

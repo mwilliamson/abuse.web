@@ -1,10 +1,13 @@
-<h2>Successfully registered</h2>
+{>base/}
 
-<p>You have successfully registered. You may now pour your scorn upon this world.</p>
+{<body}
+  <h2>Successfully registered</h2>
 
-<h2>Places of disinterest</h2>
+  <p>You have successfully registered. You may now pour your scorn upon this world.</p>
 
-{@|nav start}
-  {@|nav / I feel sick. Take me home.}
-{@|nav end}
+  <h2>Places of disinterest</h2>
 
+  {#navigation}
+    {#a url="/"}I feel sick. Take me home.{/a}
+  {/navigation}
+{/body}

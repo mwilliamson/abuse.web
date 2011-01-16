@@ -1,17 +1,20 @@
-{.section title}
+{>base/}
 
-<h2>{title|html} says:</h2>
+{<body}
 
-<blockquote><p>{message|html}</p></blockquote>
+  {?title}
+    <h2>{title} says:</h2>
 
-<p><a href="{sentenceUrl|html}">Permanent link</a></p>
+    <blockquote><p>{message}</p></blockquote>
 
-{.end}
+    <p><a href="{sentenceUrl}">Permanent link</a></p>
+  {/title}
 
-<h2>Places of disinterest</h2>
+  <h2>Places of disinterest</h2>
 
-{@|nav start}
-  {@|nav /grammars/ Who's looking at me funny?}
-  {@|nav /edit-my-grammar/ You call that abuse? Let me show you how it's done.}
-  {@|nav /what-is-this-crap/ What is this crap?}
-{@|nav end}
+  {#navigation}
+    {#a url="/grammars/"}Who's looking at me funny?{/a}
+    {#a url="/edit-my-grammar/"}You call that abuse? Let me show you how it's done.{/a}
+    {#a url="/what-is-this-crap/"}What is this crap?{/a}
+  {/navigation}
+{/body}

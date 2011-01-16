@@ -1,35 +1,42 @@
-meta: []
+{>base/}
 
-<h2>404 Not Found</h2>
+{<body}
 
-<div id="blobContainer" style="display: none">
+  <h2>404 Not Found</h2>
 
-<p>I've no idea what you were looking for, so play with some blobs instead.</p>
+  <div id="blobContainer" style="display: none">
 
-<canvas id="blob" width="600" height="400"></canvas><br>
+  <p>I've no idea what you were looking for, so play with some blobs instead.</p>
 
-<input type="button" value="Pause" id="pause" /><input type="button" value="Resume" id="resume" />
+  <canvas id="blob" width="600" height="400"></canvas><br>
 
-<ul>
-<li>Move the blobs using your mouse.</li>
-<li>Split blob with h.</li>
-<li>Join blobs with j.</li>
-<li>Toggle gravity with g.</li>
-</ul>
+  <input type="button" value="Pause" id="pause" /><input type="button" value="Resume" id="resume" />
 
-<p>Thanks to Björn Lindberg for the <a href="http://blobsallad.se/">original code</a>.</p>
+  <ul>
+  <li>Move the blobs using your mouse.</li>
+  <li>Split blob with h.</li>
+  <li>Join blobs with j.</li>
+  <li>Toggle gravity with g.</li>
+  </ul>
 
-<script src="/static/js/blob/blobsallad.js"></script>
-<script>
-    $(document).ready(function() {
-        var blobs = BLOBS.create("blob");
-        if (blobs !== null) {
-            $("#blobContainer").show();
-            document.getElementById("pause").onclick = blobs.stop;
-            document.getElementById("resume").onclick = blobs.start;
-            blobs.bindControlsTo(document);
-        }
-    });
-</script>
+  <p>Thanks to Björn Lindberg for the <a href="http://blobsallad.se/">original code</a>.</p>
 
-</div>    
+  <script src="/static/js/blob/blobsallad.js"></script>
+  <script>
+      $(document).ready(function() {
+          var blobs = BLOBS.create("blob");
+          if (blobs !== null) {
+              $("#blobContainer").show();
+              document.getElementById("pause").onclick = blobs.stop;
+              document.getElementById("resume").onclick = blobs.start;
+              blobs.bindControlsTo(document);
+          }
+      });
+  </script>
+
+  {#navigation}
+    {#a url="/"}I feel sick. Take me home.{/a}
+  {/navigation}
+
+  </div>    
+{/body}

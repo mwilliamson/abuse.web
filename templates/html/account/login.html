@@ -1,34 +1,38 @@
-<h2>Log in</h2>
+{>base/}
 
-{.section errors}
-  <p>Login failed. Too bad.</p>
-  <ul class="errors">
-    {.repeated section @}
-      <li>{@|raw}</li>
-    {.end}
-  </ul>
-{.end}
+{<body}
+  <h2>Log in</h2>
 
-<form method="post" action=".">
+  {?errors}
+    <p>Login failed. Too bad.</p>
+    <ul class="errors">
+      {#errors}
+        <li>{.|s}</li>
+      {/errors}
+    </ul>
+  {/errors}
 
-<p><label for="username">Username:</label>
-<br />
-<input type="text" name="username" id="username" value="{username|html-attr-value}" size="30" />
-</p>
+  <form method="post" action=".">
 
-<p><label for="password">Password:</label>
-<br />
-<input type="password" name="password" id="password" size="30" /></p>
+  <p><label for="username">Username:</label>
+  <br />
+  <input type="text" name="username" id="username" value="{username}" size="30" />
+  </p>
 
-<input type="hidden" name="next" id="next" value="{next|html-attr-value}" />
+  <p><label for="password">Password:</label>
+  <br />
+  <input type="password" name="password" id="password" size="30" /></p>
 
-<input type="submit" value="Log in" />
+  <input type="hidden" name="next" id="next" value="{next}" />
 
-</form>
+  <input type="submit" value="Log in" />
 
-<h2>Places of disinterest</h2>
+  </form>
 
-{@|nav start}
-  {@|nav /register/ I don't have an account.}
-  {@|nav / I feel sick. Take me home.}
-{@|nav end}
+  <h2>Places of disinterest</h2>
+
+  {#navigation}
+    {#a url="/register/"}I don't have an account.{/a}
+    {#a url="/"} I feel sick. Take me home.{/a}
+  {/navigation}
+{/body}

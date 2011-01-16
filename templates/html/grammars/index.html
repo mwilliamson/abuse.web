@@ -1,17 +1,21 @@
-<h2>People that hate you:</h2>
+{>base/}
 
-{.section grammars}
-  <ul class="links">
-    {.repeated section @}
-      <li><a href="/grammars/{name|html-attr-value}/"><span class="linkArrow">&gt;</span>{title|html}</a></li>
-    {.end}
-  </ul>
-{.or}
-  <p>No grammars found.</p>
-{.end}
+{<body}
+  <h2>People that hate you:</h2>
 
-<h2>Places of disinterest</h2>
+  {?grammars}
+    {#navigation}
+      {#grammars}
+        {#a url="/grammars/{name}/"}{title}{/a}
+      {/grammars}
+    {/navigation}
+  {:else}
+    <p>No grammars found.</p>
+  {/grammars}
 
-<ul class="links">
-  <li><a href="/"><span class="linkArrow">&gt;</span>I feel sick. Take me home.</a></li>
-</ul>
+  <h2>Places of disinterest</h2>
+
+  {#navigation}
+    {#a url="/"}I feel sick. Take me home.{/a}
+  {/navigation}
+{/body}

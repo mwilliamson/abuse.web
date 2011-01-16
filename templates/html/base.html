@@ -1,22 +1,13 @@
-meta: []
-
 <!DOCTYPE HTML>
 
 <html lang=en>
   <head>
     <meta charset=utf-8>
-    <title>[title|html]</title>
+    <title>Abuse</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/static/js/abuse/browser.js"></script>
     <script type="text/javascript" src="/static/js/abuse/abuse.js"></script>
-    [.repeated section include-js]
-      <script type="text/javascript" src="[@|html-attr-value]"></script>
-    [.end]
-
     <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
-    [.repeated section include-css]
-      <link rel="stylesheet" type="text/css" href="[@|html-attr-value]" />
-    [.end]
   </head>
 
   <body>
@@ -27,19 +18,19 @@ meta: []
       </div>
       <div id="accountControls">
         <ul>
-          [.section user]
-            <li>Logged in as [username|html].</li>
+          {#user}
+            <li>Logged in as {username}.</li>
             <li><a href="/logout/">Logout</a></li>
-          [.or]
+          {:else}
             <li><a href="/login/">Login</a></li>
             <li><a href="/register/">Register</a></li>
-          [.end]
+          {/user}
         </ul>
       </div>
       <div style="clear:both;"></div>
     </div>
     <div id="body">
-      [body|raw]
+      {+body:page/}
     </div>
   </body>
 
