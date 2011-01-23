@@ -64,18 +64,19 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: 2em;
 }
 
-#accountControls .noLink, #accountControls a, #accountControls a:visited {
+#accountControls .noLink, #accountControls a, #accountControls a:visited, .permalink a {
     display: block;
     font-size: 0.9em;
-    padding: 0.4em;
+    padding: 0.4em 1em;
     color: #444;
 }
 
-#accountControls a, #accountControls a:visited {
+#accountControls a, #accountControls a:visited, .permalink a, .permalink a:visited {
+    display: table;
     color: #fff;
     background-color: #7F1637;
     text-decoration: none;
-    min-width: 5em;
+    min-width: 4em;
     text-align: center;
     border-radius: 0.7em;
     -moz-border-radius: 0.7em
@@ -90,11 +91,8 @@ h1, h2, h3, h4, h5, h6 {
     border-style: solid;
 }
 
-h2 {
-    font-weight: normal;
-/*
-    border-bottom: #FFB733 2px solid;
-*/
+.permalink {
+    margin-left: 1em;
 }
 
 ul.links {
