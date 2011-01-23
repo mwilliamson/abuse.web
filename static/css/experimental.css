@@ -1,0 +1,173 @@
+@font-face {
+    font-family: 'LindenHillRegular';
+    src: url('/static/fonts/LindenHill-webfont.eot');
+    src: local('☺'), url('/static/fonts/LindenHill-webfont.woff') format('woff'), url('/static/fonts/LindenHill-webfont.ttf') format('truetype'), url('/static/fonts/LindenHill-webfont.svg#webfontzJfqFuPj') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "dejavu sans", verdana, sans-serif;
+    margin: 0;
+    background-color: #f8f8f8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: LindenHillRegular;
+    font-weight: normal;
+}
+
+#container {
+    width: 760px;
+    margin: 0.5em auto;
+}
+
+#top {
+    margin: 0;
+    padding: 0.5em 0.5em 0.4em 0.5em;
+    overflow: auto;
+    color: #444;
+    line-height: 1.2;
+}
+
+#header {
+    float: left;
+}
+
+#header h1, #header h1 a {
+    font-weight: normal;
+    margin: 0;
+    text-decoration: none;
+    color: #807779;
+    font-size: 1.75em;
+}
+
+#header p {
+    margin: 0;
+    font-size: 0.8em;
+}
+
+#accountControls {
+    float: right;
+    line-height: 1.5
+}
+
+#accountControls ul {
+    list-style-type: none;
+    margin: 2.6em 0 0 0;
+    padding: 0;
+}
+
+#accountControls li {
+    display: block;
+    float: left;
+    margin-left: 2em;
+}
+
+#accountControls .noLink, #accountControls a, #accountControls a:visited {
+    display: block;
+    font-size: 0.9em;
+    padding: 0.4em;
+    color: #444;
+}
+
+#accountControls a, #accountControls a:visited {
+    color: #fff;
+    background-color: #7F1637;
+    text-decoration: none;
+    min-width: 5em;
+    text-align: center;
+    border-radius: 0.7em;
+    -moz-border-radius: 0.7em
+}
+
+#body {
+    background-color: #fff;
+    padding: 0 1em 1em 1em;
+    
+    border-color: #C22121;
+    border-width: 2px 0 0 0;
+    border-style: solid;
+}
+
+h2 {
+    font-weight: normal;
+/*
+    border-bottom: #FFB733 2px solid;
+*/
+}
+
+ul.links {
+    margin: 1em;
+    padding: 0;
+    border-top: #FFB733 2px solid;
+    border-bottom: #FFB733 1px solid;
+}
+
+.links li {
+    margin: 0;
+    list-style-type: none;
+    border-bottom: #FFB733 1px solid;
+}
+
+.links li a, .links li a:visited {
+    display: block;
+    text-decoration: none;
+    background-color: #f4f3f0;
+    color: #222;
+    padding: 0.5em 1em;
+}
+
+.links li a:hover {
+    background-color: #FFD385;
+    color: #222;
+}
+
+.linkArrow {
+    display: block;
+    float: left;
+    border: 0;
+    padding-right: 1em;
+    font-size: 0.8em;
+    margin-top: 0.1em;
+/*
+    font-family: "Trebuchet ms";
+*/
+    font-weight: bold;
+    color: #FFB733;
+}
+
+pre {
+    margin: 1em;
+    padding: 1em;
+    background-color: #f1f4f4;
+    color: #000;
+    border-color: #047878;
+    border-style: solid;
+    border-width: 2px 0;
+}
+
+blockquote {
+    margin: 1em;
+    padding: 1em;
+    background-color: #f4f2f0;
+    color: #000;
+    border-color: #F57336;
+    border-style: solid;
+    border-width: 2px 0;
+}
+
+blockquote p {
+    margin: 0;
+    padding: 0;
+}
+
+.example {
+    font-style: italic;
+    padding-left: 1em;
+}
+
+a, a:visited {
+    color: #003399;
+}
+
