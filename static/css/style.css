@@ -74,6 +74,10 @@ h1, h2, h3, h4, h5, h6 {
     -moz-border-radius: 0.7em
 }
 
+#accountControls a:hover, .permalink a:hover {
+    background-color: #AD1A49;
+}
+
 #body {
     background-color: #fff;
     padding: 0 1em 1em 1em;
