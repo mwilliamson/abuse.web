@@ -27,7 +27,7 @@ exports.bindingInstanceToProviderResultsInTheFunctionBeingCalledWhen = function(
 exports.injectorCanCallInjectableFunction = function(test) {
     var injector = inject.injector(),
         user = {name: "Bob"},
-        username = inject.injectable("user", function(user, done) {
+        username = inject.injectable(module, "username", ["user"], function(user, done) {
             done(user.name);
         });
     
@@ -42,10 +42,10 @@ exports.injectorCanCallInjectableFunction = function(test) {
 exports.injectorInjectInjectableFunctions = function(test) {
     var injector = inject.injector(),
         user = {name: "Bob"},
-        username = inject.injectable("user", function(user, done) {
+        username = inject.injectable(module, "username", ["user"], function(user, done) {
             done(user.name);
         }),
-        usernameAgain = inject.injectable(username, function(username, done) {
+        usernameAgain = inject.injectable(module, "usernameAgain", [username], function(username, done) {
             done(username);
         });
     
@@ -78,7 +78,8 @@ exports.canBindKeysToInjectableFunctions = function(test) {
         user = {name: "Bob"};
     
     injector.bind("user").toInstance(user);
-    injector.bind("username").toProvider(inject.injectable("user", function(user, done) { done(user.name); }));
+    injector.bind("username").toProvider(
+        inject.injectable(module, "username", ["user"], function(user, done) { done(user.name); }));
     
     injector.get("username", function(value) {
         test.equal("Bob", value);
@@ -89,10 +90,10 @@ exports.canBindKeysToInjectableFunctions = function(test) {
 exports.bindingToFunctionInjectsAnInjectableFunctionWithParametersAlreadyInjected = function(test) {
     var injector = inject.injector(),
         user = {name: "Bob"},
-        username = inject.injectable("user", function(user, done) {
+        username = inject.injectable(module, "username", ["user"], function(user, done) {
             done(user.name);
         }),
-        usernameAgain = inject.injectable("getUsername", function(getUsername, done) {
+        usernameAgain = inject.injectable(module, "usernameAgain", ["getUsername"], function(getUsername, done) {
             getUsername(done);
         });
     
@@ -108,12 +109,12 @@ exports.bindingToFunctionInjectsAnInjectableFunctionWithParametersAlreadyInjecte
 exports.canUseAsynchronousProviders = function(test) {
     var injector = inject.injector(),
         user = {name: "Bob"},
-        username = inject.injectable("user", function(user, done) {
+        username = inject.injectable(module, "username", ["user"], function(user, done) {
             setTimeout(function() {
                 done(user.name);
             }, 0);
         }),
-        usernameAgain = inject.injectable("getUsername", function(getUsername) {
+        usernameAgain = inject.injectable(module, "usernameAgain", ["getUsername"], function(getUsername) {
             return getUsername();
         });
     

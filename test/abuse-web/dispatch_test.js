@@ -41,7 +41,7 @@ exports.dispatcherUsesInjectorToCallFunctions  = function(test) {
         injector = inject.injector(),
         user = {name: "Bob"},
         args,
-        handler = inject.injectable("user", function(user) {
+        handler = inject.injectable(module, "handler", ["user"], function(user) {
             args = arguments;
         });
     
@@ -62,7 +62,7 @@ exports.regexResultsAreBoundToPathParameters = function(test) {
         dispatcher = dispatch.dispatcher(),
         injector = inject.injector(),
         args,
-        handler = inject.injectable("pathParameters", function(pathParams) {
+        handler = inject.injectable(module, "handler", ["pathParameters"], function(pathParams) {
             args = arguments;
         });
         
