@@ -39,31 +39,14 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.8em;
 }
 
-#accountControls {
-    float: right;
-    line-height: 1.5
-}
-
-#accountControls ul {
-    list-style-type: none;
-    margin: 2.6em 0 0 0;
-    padding: 0;
-}
-
-#accountControls li {
-    display: block;
-    float: left;
-    margin-left: 2em;
-}
-
-#accountControls .noLink, #accountControls a, #accountControls a:visited, .permalink a {
+.permalink a {
     display: block;
     font-size: 0.9em;
     padding: 0.4em 1em;
     color: #444;
 }
 
-#accountControls a, #accountControls a:visited, .permalink a, .permalink a:visited {
+.permalink a, .permalink a:visited {
     display: inline-block;
     color: #fff;
     background-color: #7F1637;
@@ -74,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
     -moz-border-radius: 0.7em
 }
 
-#accountControls a:hover, .permalink a:hover {
+.permalink a:hover {
     background-color: #AD1A49;
 }
 
