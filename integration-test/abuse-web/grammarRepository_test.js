@@ -1,5 +1,5 @@
-var grammarRepository = require("abuse-web/grammarRepository").grammarRepository,
-    userRepository = require("abuse-web/userRepository").userRepository,
+var grammarRepository = require("abuse-web/grammarRepository"),
+    userRepository = require("abuse-web/userRepository"),
     integrationTest = require("./integration-test").integrationTest;
     
 exports.fetchByNameCallsFirstCallbackWithNullIfSecondCallbackIsUndefinedAndNoSuchGrammarExists =

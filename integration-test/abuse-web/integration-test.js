@@ -14,16 +14,19 @@ exports.integrationTest = function() {
     
     return function(test) {        
         var testDone = test.done;
-        injectArgs.push(function(done) {
-            done(test)
-        });
-        injectArgs.push(func);
-        inject.injectable.apply(undefined, injectArgs);
-        client.flushdb();
-        injector.get(func);
         test.done = function() {
             client.flushdb();
             testDone.apply(test, []);
         };
+        client.flushdb();
+        injector.get(inject.injectable(injectArgs, function() {
+            var injectedArgs = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
+            injectedArgs.push(test);
+            console.log(injectedArgs);
+            console.log(func.toString());
+            var done = arguments[arguments.length - 1];
+            func.apply(func, injectedArgs);
+            done();
+        }));
     };
 };
