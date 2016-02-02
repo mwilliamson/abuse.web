@@ -1,0 +1,38 @@
+$SENTENCE -> $INSULT.
+
+$INSULT -> You have $ABAD $ATTRIBUTE
+$INSULT -> You $VERBS $VICTIM $BONUS $PLACE
+
+$ABAD -> an unfortunate case of
+$ABAD -> the worst
+$ABAD -> maximum
+
+$ATTRIBUTE -> stinky bum
+$ATTRIBUTE -> scrumple face
+$ATTRIBUTE -> tramp breath
+$ATTRIBUTE -> ugliness
+
+$VERBS -> relieve
+$VERBS -> "full massage"
+$VERBS -> do a special dance for
+
+$VICTIM -> waiters
+$VICTIM -> dogs
+$VICTIM -> farm hands
+$VICTIM -> tramps
+$VICTIM -> Stephen Hawkwind
+$VICTIM -> Autonomy
+$VICTIM -> Billy Ray Cyrus
+
+$BONUS -> in return for loose change,
+$BONUS -> just for fun,
+$BONUS -> because you can,
+$BONUS -> to secure promotion,
+$BONUS -> to earn your bus fair,
+
+$PLACE -> in the shed
+$PLACE -> down at the bottom of the garden, among the birds and the bees
+$PLACE -> underwater
+$PLACE -> on the moon
+$PLACE -> while upside-down
+$PLACE -> under your desk

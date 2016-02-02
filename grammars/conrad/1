@@ -1,0 +1,32 @@
+$SENTENCE -> $INSULT.
+$SENTENCE -> $INSULT; or at least that's what she said.
+$SENTENCE -> $PROXY $VERBS $PLACE.
+
+$INSULT -> You have $ABAD $ATTRIBUTE
+$INSULT -> $PROXY has $ABAD $ATTRIBUTE
+
+$ABAD -> a $VERY miniscule
+$ABAD -> an enormous
+$ABAD -> the smelliest
+
+$VERY -> very very very very
+$VERY -> very very very
+$VERY -> very very
+$VERY -> very 
+$VERY ->
+
+$ATTRIBUTE -> face
+$ATTRIBUTE -> nose
+$ATTRIBUTE -> knee
+$ATTRIBUTE -> finger
+
+$PROXY -> Your mum
+$PROXY -> Your sister
+
+$VERBS -> works
+$VERBS -> scrubs the decks
+$VERBS -> licks the plates
+
+$PLACE -> at McDonald's
+$PLACE -> amidships
+$PLACE -> at Oxford Brookes

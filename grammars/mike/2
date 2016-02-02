@@ -1,0 +1,27 @@
+$SENTENCE -> I hate you!
+$SENTENCE -> You smell of $SMELL
+$SMELL -> elderberries
+$SMELL -> dogfood
+$SENTENCE -> Go away!
+$SENTENCE -> You're as $RUDE_ADJ as $ANIMAL
+$RUDE_ADJ -> stupid
+$RUDE_ADJ -> ugly
+$ANIMAL -> a dog
+$ANIMAL -> a cockroach
+$ANIMAL -> a rat
+
+$SENTENCE -> You, $TITLE, are $RUDE_NOUN and $RUDE_NOUN
+$TITLE -> sir
+$TITLE -> madam
+$RUDE_NOUN -> a scoundrel
+$RUDE_NOUN -> a rascal
+$RUDE_NOUN -> an idiot
+$RUDE_NOUN -> a villain
+$RUDE_NOUN -> a danger to society
+$RUDE_NOUN -> a freak of nature
+
+$SENTENCE -> You $VERB like $ANIMAL
+$VERB -> eat
+$VERB -> walk
+$VERB -> talk
+$VERB -> think

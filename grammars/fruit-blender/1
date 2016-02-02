@@ -1,0 +1,35 @@
+$SENTENCE -> $OPEN $CLOSE
+$SENTENCE -> $SAD, your $ATTRIBUTE means that $CONSEQUENCE
+$SENTENCE -> $OPEN $CONSEQUENCE
+
+
+$OPEN -> Even by fruit blender standards,
+$OPEN -> I am a fruit blender, and
+$OPEN -> Of course I know I'm merely a fruit blender, but
+
+$CLOSE -> your $ATTRIBUTE $VERBPHRASE.
+
+$SAD -> Regrettably
+$SAD -> Unfortunately
+$SAD -> Sadly
+
+$CONSEQUENCE -> I cannot bring myself to allow you to blend fruit in me. 
+$CONSEQUENCE -> I shall not be allowing you to come into contact with my blender children.
+$CONSEQUENCE -> I have renounced the last ounce of faith that was left in my bitter, blackened soul. 
+$CONSEQUENCE -> I shall endeavour, by force of will alone, to render any fruit you attempt to force through me tasteless and unsatisfying.
+$CONSEQUENCE -> I dearly hope your 
+$CONSEQUENCE -> my puppy has died.
+
+
+$ATTRIBUTE -> criminal disregard for common hygiene
+$ATTRIBUTE -> lack of beauty
+$ATTRIBUTE -> freakishly uneven set of toes
+$ATTRIBUTE -> unnerving stench of slightly-off custard
+$ATTRIBUTE -> woefully unkempt nostril hair
+$ATTRIBUTE -> persistence in wearing those particular shoes
+$ATTRIBUTE -> habit of walking with an awkward, syncopated rhythm
+
+$VERBPHRASE -> would bring a tear to the eye of the saltiest of seadogs.
+$VERBPHRASE -> is simply wrong. 
+$VERBPHRASE -> defies all sense, reason and logic. Descartes would cry. Look what you have done, you have made Descartes cry. You monster.
+$VERBPHRASE -> will one day cause all that is, all that has been, and all that may ever be, to end in silent, miserable oblivion.

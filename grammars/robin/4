@@ -1,0 +1,43 @@
+$SENTENCE -> You $VERB2 $NOUNP with a $NOUN, $TIMEV $LOCATION 
+$SENTENCE -> Why do you $TIMEV $VERB2 your $NOUN whilst trying to $VERB2?
+
+$VERB2 -> wank
+$VERB2 -> eat
+$VERB2 -> harness
+$VERB2 -> shag
+$VERB2 -> lick
+$VERB2 -> bleed
+$VERB2 -> tickle
+
+$NOUNP -> horses
+$NOUNP -> colleagues
+$NOUNP -> giant penises
+$NOUNP -> horses
+$NOUNP -> guests
+$NOUNP -> people
+$NOUNP -> torture implements
+
+$NOUN -> family member
+$NOUN -> dog
+$NOUN -> child
+$NOUN -> hammer
+$NOUN -> visionary gentleman
+$NOUN -> household appliance
+$NOUN -> lego box with a hole in it
+$NOUN -> gelatinous blob
+
+$TIMEV -> always
+$TIMEV -> frequently
+$TIMEV -> occationally
+$TIMEV -> from time to time
+$TIMEV -> often
+$TIMEV -> sometimes
+$TIMEV -> rarely
+
+$LOCATION -> in a shed
+$LOCATION -> on a mountain
+$LOCATION -> in your car
+$LOCATION -> behind the bycycle shed
+$LOCATION -> in the kitchen
+$LOCATION -> at the office
+$LOCATION -> in a police cell

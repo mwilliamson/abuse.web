@@ -1,0 +1,23 @@
+$SENTENCE -> Your $RELATION $VERB $NOUN and your $RELATION $VERB $NOUN
+$SENTENCE -> I $RUDE_VERB in your $LOCATION
+
+$VERB -> smells of
+$VERB -> eats
+$VERB -> cavorts with
+
+$RUDE_VERB -> fart
+$RUDE_VERB -> spit
+$RUDE_VERB -> narrow my eyes
+
+$LOCATION -> face
+$LOCATION -> general direction
+
+$NOUN -> elderberries
+$NOUN -> hamsters
+
+$RELATION -> mother
+$RELATION -> father
+$RELATION -> grandmother
+$RELATION -> sister
+$RELATION -> brother
+$RELATION -> uncle

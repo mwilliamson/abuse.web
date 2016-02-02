@@ -1,0 +1,32 @@
+$SENTENCE -> Your $RELATION $VERB $NOUNS and your $RELATION $VERB $NOUNS
+$SENTENCE -> I $RUDE_VERB in your $LOCATION
+$SENTENCE -> Your $RELATION is a $LIKENESS and your $RELATION $VERB $NOUNS
+
+$VERB -> smells of
+$VERB -> eats
+$VERB -> worships
+
+$RUDE_VERB -> fart
+$RUDE_VERB -> spit
+$RUDE_VERB -> slurp
+$RUDE_VERB -> tut
+
+$LOCATION -> face
+$LOCATION -> general direction
+$LOCATION -> lavatory
+$LOCATION -> favourite spot in the garden
+
+$NOUNS -> elderberries
+$NOUNS -> hamsters
+$NOUNS -> mashed banana
+
+$LIKENESS -> hamster
+$LIKENESS -> porcupine
+
+$RELATION -> mother
+$RELATION -> father
+$RELATION -> grandmother
+$RELATION -> sister
+$RELATION -> brother
+$RELATION -> uncle
+$RELATION -> best friend
